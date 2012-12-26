@@ -370,7 +370,7 @@ def toggle_build(connection, player = None):
     connection.protocol.send_chat('Building has been toggled %s!' % on_off)
     connection.protocol.irc_say('* %s toggled building %s' % (connection.name, 
         on_off))
-
+@alias('enablebuild')
 @alias('eb')
 @alias('ab')
 @name('allowbuild')
