@@ -1,0 +1,11 @@
+name = 'Maze'
+version = '1.0'
+author = 'KomradeWalugi64'
+description = "."
+extensions = {
+     'water_damage' : 50,  
+     'arena': True,
+     'arena_blue_spawn' : (397,193,59),
+     'arena_green_spawn' : (335,180,59),
+     'arena_gates': ((338,180,57), (391,191,57))
+  }

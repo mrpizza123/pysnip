@@ -1,0 +1,11 @@
+name = 'abadoned stronghold'
+version = '1.0'
+author = 'EssigGurkenFred'
+description = 'a abadoned stronghold created by EGF'
+extensions = {
+     'arena': True,
+     'arena_blue_spawn' : (202,224,52),
+     'arena_green_spawn' : (230,276,52),
+     'arena_gates': ((229,277,53), (279,224,51)),
+     'water_damage' : 100
+ }

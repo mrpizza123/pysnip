@@ -1,0 +1,3 @@
+LIBRARY mapmaker.pyd
+EXPORTS
+initmapmaker

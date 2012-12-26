@@ -1,0 +1,11 @@
+name = 'The_Townarena'
+version = '1.0'
+author = 'IISOD}M.Shadow'
+description = ('An everyday life in a everyday town')
+extensions = {
+      'arena': True,
+      'arena_blue_spawn' : ((495, 162, 51)),
+      'arena_green_spawn' : ((369, 241, 51)),
+      'arena_gates' : ((364, 329, 51), (492, 164, 51), (498, 161, 51)),
+    }
+

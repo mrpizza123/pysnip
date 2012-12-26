@@ -1,0 +1,4 @@
+name = 'Hillside v2'
+version = '2.0'
+author = 'TheGrandmaster'
+description = ('5vs5 or more map.')

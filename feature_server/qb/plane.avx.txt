@@ -1,0 +1,1 @@
+{"origin": [6, 85, 48], "colored": false}

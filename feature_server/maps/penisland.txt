@@ -1,0 +1,156 @@
+name = 'Random'
+version = '1.0'
+author = 'Triplefox'
+description = ('Random generated map.')
+
+def gen_script(basename, seed):
+
+    from pyspades import mapmaker
+
+    # define the gradients
+    
+    grass = mapmaker.Gradient()
+    grass.set_step_rgb(0, (255,255,255))
+    grass.hsb(1, (288,82,100), 32, (295,58,99))
+    grass.hsb(32, (304,35,100), 64, (305,32,99))
+
+    hill = mapmaker.Gradient()
+    hill.set_step_rgb(0, (255,255,255))
+    hill.hsb(1, (288,72,100), 64, (305,13,99))
+    
+    water = mapmaker.Gradient()
+    water.set_step_rgb(0, (255,0,246))
+    water.hsb(1, (324,100,98), 16, (324,71,98))
+    water.hsb(16, (324,45,100), 64, (324,28,99))
+
+    # define biomes (gradient + avg. height infos)
+    
+    grass_biome = mapmaker.Biome(grass, 0.97, -0.1, 0.02)
+    hill_biome = mapmaker.Biome(hill, 0.9, -0.3, 0.07)
+    water_biome = mapmaker.Biome(water, 1.2, -0.16, 0.04)
+
+    # biome map - tiled biome instances
+
+    bmap = mapmaker.BiomeMap([grass_biome,
+                              hill_biome,
+                              water_biome],32,32)
+
+    # predefined points to force a similar general character of map
+    points = [(15,15,grass_biome),(15,22,hill_biome),
+              (0,24,water_biome),(31,24,water_biome),
+              (0,8,water_biome),(31,8,water_biome)]
+    for n in xrange(0,31,8):
+        points.append((n,31,water_biome))
+
+    # additional randomized points
+    points.extend(bmap.random_points(2,grass_biome,0,8,32,16))
+    points.extend(bmap.random_points(1,hill_biome,0,8,32,16))
+    points.extend(bmap.random_points(1,water_biome,8,8,16,16))
+    
+    bmap.point_flood(points)
+    bmap.jitter()
+
+    # transform the biome map into a heightmap
+    
+    hmap, gradients = bmap.create_heightmap()
+    hmap.midpoint_displace(0.3,0.68,4)
+    hmap.jitter_colors(10)
+
+    # draw the river
+    
+    import random
+    YINCREMENT = 8
+    XINCREMENT = 12
+    XMIN = 256-64
+    XMAX = 256+64
+    x = random.randint(XMIN,XMAX)
+    for y in xrange(YINCREMENT,513,YINCREMENT):
+        nx = max(XMIN,min(XMAX,random.randint(x-XINCREMENT,
+                                                    x+XINCREMENT)))
+        hmap.line_add(x,y-YINCREMENT,nx,y,8,0.005)
+        hmap.line_set(x,y-YINCREMENT,nx,y,2,2.0)
+        x = nx
+    
+    hmap.smoothing()    
+    hmap.truncate()
+    hmap.rewrite_gradient_fill(gradients)
+    hmap.rgb_noise_colors(-2,2)
+    hmap.smooth_colors()
+
+    vxl = hmap.write_vxl()
+            
+    from feature_server.scripts.avx import AVX
+    import json
+    import random
+    from pyspades.common import make_color
+
+    def rotate_all(dct, fm, to):
+        amt = (to - fm) % 4
+        if amt == 0:
+            rot = lambda t: t
+        elif amt == 1:
+            rot = lambda t: (-t[1],  t[0]) + t[2:]
+        elif amt == 2:
+            rot = lambda t: (-t[0], -t[1]) + t[2:]
+        elif amt == 3:
+            rot = lambda t: ( t[1], -t[0]) + t[2:]
+        if isinstance(dct, dict):
+            dct = dct.iteritems()
+        for k,v in dct:
+            yield rot(k), v
+
+    def shift_origin(dct, new_origin):
+        new_origin = tuple(new_origin)
+        shift = lambda tpl: tuple(a-b for a,b in zip(tpl, new_origin))
+        if isinstance(dct, dict):
+            dct = dct.iteritems()
+        for k,v in dct:
+            yield shift(k), v
+    
+    def build(px, py, structure, default_color):
+        if isinstance(structure, dict):
+            structure = structure.iteritems()
+        pz = int(hmap.get(px,py)*63)
+        for xyz, color in structure:
+            x, y, z = xyz
+            x, y, z = x + px, y + py, z + pz
+            vxl.set_point(x, y, z, color or default_color)
+            #if color is none, use default_color
+
+    penis_settings = json.load(open('./qb/penis.avx.txt', 'r'))
+    penis = AVX.fromfile('./qb/penis.avx').tosparsedict()
+    penis = dict(shift_origin(penis, penis_settings['origin']))
+
+    plane_settings = json.load(open('./qb/plane.avx.txt', 'r'))
+    plane = AVX.fromfile('./qb/plane.avx').tosparsedict()
+    plane = dict(shift_origin(plane, plane_settings['origin']))
+
+    for x in xrange(0, bmap.width):
+        for y in xrange(0, bmap.height):
+            structure = dict()
+            rmax = 0
+            rotatemin = 0
+            rotate = 1
+            if bmap.get_repeat(x, y) is hill_biome:
+                structure = penis
+                rmax = 3
+                rotate = 3
+                color = (255,0,216)
+            elif bmap.get_repeat(x, y) is grass_biome:
+                structure = random.choice((plane,penis))
+                rmax = 1
+                if structure is plane:
+                    color = (255,255,255)
+                    rotatemin = 1
+                else:
+                    color = (255,0,216)
+            else:
+                continue
+            left, top, right, bottom = bmap.rect_of_point(x,y)
+            for ct in xrange(random.randint(1,rmax)):
+                build(random.randint(left,right)
+                    , random.randint(top,bottom) 
+                    , rotate_all(structure, 0, random.randint(rotatemin,rotate)) #rotate it different every time
+                    , color)
+    
+    return vxl
