@@ -1,38 +1,31 @@
+from pyspades.server import block_action
+from pyspades.collision import distance_3d_vector
 from commands import add, admin
-import clearbox
-import cbc
+from map import Map
+from pyspades.constants import *
+import commands
 
-# requires clearbox.py in the /scripts directory
+# requires db.py
 
 def sign(x):
     return (x > 0) - (x < 0)
 
 @admin
-def dw(connection, value = ''):
-    try:
-        value = int(value)
-    except ValueError:
-        value = 0
-    if value < 65 and value > -65 and abs(value) > 1:
+def dw(connection, value = None):
+    value = int(value)
+    if value < 65 and value > -63 and value != 0:
         connection.dewalling = value
-        return 'DeWalling %s block high wall. "/dw" to cancel.' % connection.dewalling
+        return 'DeWalling %s block high wall. "/dw 0" to cancel.' % connection.dewalling
     else:
         connection.dewalling = None
-        return 'No longer DeWalling. Activate with `/dw 64` to `/dw -64`'
+        return 'No longer DeWalling. Type /dw 64 or less.'
 add(dw)
 
 def apply_script(protocol, connection, config):
-    protocol, connection = cbc.apply_script(protocol, connection, config)
-    
     class DeWallMakerConnection(connection):
-        def __init__(self, *args, **kwargs):
-            connection.__init__(self, *args, **kwargs)
-            self.dewalling = None
-        
+        dewalling = None
         def on_block_removed(self, x, y, z):
             if self.dewalling is not None:
-                z2 = min(61, max(0, z - self.dewalling + sign(self.dewalling)))
-                clearbox.clear_solid(self.protocol, x, y, z, x, y, z2, self.god)
+                self.clear_box_solid(x, y, z, x, y, min(61, max(0, z - self.dewalling + sign(self.dewalling))))
             return connection.on_block_removed(self, x, y, z)
-    
     return protocol, DeWallMakerConnection

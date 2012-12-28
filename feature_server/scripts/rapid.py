@@ -41,8 +41,8 @@ def toggle_rapid(connection, player = None):
     else:
         if player.rapid_loop and player.rapid_loop.running:
             player.rapid_loop.stop()
-        player.rapid_loop = None   
-
+        player.rapid_loop = None
+    
     message = 'now rapid' if rapid else 'no longer rapid'
     player.send_chat("You're %s" % message)
     if connection is not player and connection in protocol.players:
@@ -58,34 +58,6 @@ def resend_tool(player):
         player.send_contained(set_tool)
 
 add(toggle_rapid)
-
-@name('srap')
-@admin
-def toggle_rapid_silent(connection, player = None):
-    protocol = connection.protocol
-    if player is not None:
-        player = get_player(protocol, player)
-    elif connection in protocol.players:
-        player = connection
-    else:
-        raise ValueError()
-    
-    player.rapid = rapid = not player.rapid
-    player.rapid_hack_detect = not rapid
-    if rapid:
-        player.rapid_loop = LoopingCall(resend_tool, player)
-    else:
-        if player.rapid_loop and player.rapid_loop.running:
-            player.rapid_loop.stop()
-        player.rapid_loop = None
-
-    message = 'now rapid' if rapid else 'no longer rapid'
-    if connection is not player and connection in protocol.players:
-        connection.send_chat('%s is %s' % (player.name, message))
-    protocol.irc_say('* %s is %s' % (player.name, message))
-
-add(toggle_rapid_silent)
-
 
 def apply_script(protocol, connection, config):
     class RapidConnection(connection):
