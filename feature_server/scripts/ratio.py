@@ -7,8 +7,6 @@ Maintainer: mat^2
 
 from commands import get_player, add
 from pyspades.constants import *
-from twisted.internet.reactor import seconds
-from pyspades.common import prettify_timespan
 
 # True if you want to include the headshot-death ratio in the ratio
 # NOTE: this makes the message overflow into two lines
@@ -17,11 +15,8 @@ HEADSHOT_RATIO = False
 # List other types of kills as well
 EXTENDED_RATIO = False
 
-#Adds rate of kills
-KILLS_PER_MINUTE = True
-
 # "ratio" must be AFTER "votekick" in the config.txt script list
-RATIO_ON_VOTEKICK = False
+RATIO_ON_VOTEKICK = True
 IRC_ONLY = False
 
 def ratio(connection, user=None):
@@ -47,9 +42,6 @@ def ratio(connection, user=None):
     msg += " (%s kills, %s deaths" % (kills, connection.ratio_deaths)
     if EXTENDED_RATIO:
         msg += ", %s headshot, %s melee, %s grenade" % (headshotkills, meleekills, grenadekills)
-    if KILLS_PER_MINUTE:
-        dt = (seconds() - connection.time_login) /60
-        msg += ", %.2f kills per minute" % (kills/dt)
     msg += ")."
     return msg
 
@@ -62,7 +54,6 @@ def apply_script(protocol, connection, config):
         ratio_meleekills = 0
         ratio_grenadekills = 0
         ratio_deaths = 0
-        time_login = 0
         
         def on_kill(self, killer, type, grenade):
             if killer is not None and self.team is not killer.team:
@@ -74,10 +65,7 @@ def apply_script(protocol, connection, config):
             
             self.ratio_deaths += 1
             return connection.on_kill(self, killer, type, grenade)
-
-        def on_login(self, name):
-            self.time_login = seconds()
-            return connection.on_login(self, name)
+    
     class RatioProtocol(protocol):
         def on_votekick_start(self, instigator, victim, reason):
             result = protocol.on_votekick_start(self, instigator, victim, reason)

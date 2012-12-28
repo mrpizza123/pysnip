@@ -72,7 +72,7 @@ def apply_script(protocol, connection, config):
                 self.map_info.get_spawn_location = get_spawn_location
                 for x in xrange(256 - PLATFORM_WIDTH, 256 + PLATFORM_WIDTH):
                     for y in xrange(256 - PLATFORM_HEIGHT, 256 + PLATFORM_HEIGHT):
-                        map.set_point(x, y, 1, PLATFORM_COLOR, False)
+                        map.set_point(x, y, 1, PLATFORM_COLOR)
             return protocol.on_map_change(self, map)
         
         def is_indestructable(self, x, y, z):
@@ -102,13 +102,13 @@ def apply_script(protocol, connection, config):
             return False
 
         def on_block_build_attempt(self, x, y, z):
-            if invalid_build_position(x, y, z):
+            if self.invalid_build_position(x, y, z):
                 return False
             return connection.on_block_build_attempt(self, x, y, z)
 
         def on_line_build_attempt(self, points):
             for point in points:
-                if invalid_build_position(point.x, point.y, point.z):
+                if self.invalid_build_position(*point):
                     return False
             return connection.on_line_build_attempt(self, points)
 
@@ -141,4 +141,3 @@ def apply_script(protocol, connection, config):
             return connection.on_block_destroy(self, x, y, z, mode)
    
     return BabelProtocol, BabelConnection
-
