@@ -1,3 +1,0 @@
-LIBRARY packet.pyd
-EXPORTS
-initpacket

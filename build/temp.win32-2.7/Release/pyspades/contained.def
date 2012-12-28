@@ -1,3 +1,0 @@
-LIBRARY contained.pyd
-EXPORTS
-initcontained

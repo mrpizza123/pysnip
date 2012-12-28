@@ -1,3 +1,0 @@
-LIBRARY bytes.pyd
-EXPORTS
-initbytes
