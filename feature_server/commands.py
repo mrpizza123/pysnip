@@ -152,6 +152,7 @@ def ban(connection, value, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     player = get_player(connection.protocol, value)
     player.ban(reason, duration)
+    
 
 @admin
 def banip(connection, ip, *arg):
@@ -427,6 +428,45 @@ def toggle_kill(connection, player = None):
     connection.protocol.send_chat('Killing has been toggled %s!' % on_off)
     connection.protocol.irc_say('* %s toggled killing %s' % (connection.name, 
         on_off))
+
+@alias('ek')
+@name('enablekill')
+@admin
+def enable_kill(connection, player = None):
+    if player is not None:
+        player = get_player(connection.protocol, player)
+        value = not player.killing
+        player.killing = value
+        msg = '%s can kill again' if value else '%s is disabled from killing'
+        connection.protocol.send_chat(msg % player.name)
+        connection.protocol.irc_say('* %s %s killing for %s' % (connection.name,
+            'enabled', player.name))
+        return
+    value = not connection.protocol.killing
+    connection.protocol.killing = value
+    on =  'ON'
+    connection.protocol.send_chat('Killing has been toggled %s!' % on)
+    connection.protocol.irc_say('* %s toggled killing %s' % (connection.name, 
+        on))
+@alias('dk')
+@name('disablekill')
+@admin
+def disable_kill(connection, player = None):
+    if player is not None:
+        player = get_player(connection.protocol, player)
+        value = not player.killing
+        player.killing = value
+        msg = '%s can kill again' if value else '%s is disabled from killing'
+        connection.protocol.send_chat(msg % player.name)
+        connection.protocol.irc_say('* %s %s killing for %s' % (connection.name,
+            'disabled', player.name))
+        return
+    value = not connection.protocol.killing
+    connection.protocol.killing = value
+    off =  'OFF'
+    connection.protocol.send_chat('Killing has been toggled %s!' % off)
+    connection.protocol.irc_say('* %s toggled killing %s' % (connection.name, 
+        off))
 
 @name('toggleteamkill')
 @admin
@@ -919,6 +959,8 @@ command_list = [
     disable_build,
     toggle_build,
     toggle_kill,
+    enable_kill,
+    disable_kill,
     toggle_teamkill,
     teleport,
     tpsilent,

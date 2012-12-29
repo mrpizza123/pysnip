@@ -58,17 +58,21 @@ cdef class VXLData:
         if fp is not None:
             data = fp.read()
             c_data = data
+            import zlib
+            crc = zlib.crc32(data) #& 0x7fffffff
+            self.crc = crc
         else:
             c_data = NULL
-        self.map = load_vxl(c_data)
-    
-    def load_vxl(self, c_data = None):
         self.map = load_vxl(c_data)
     
     def copy(self):
         cdef VXLData map = VXLData()
         map.map = copy_map(self.map)
         return map
+    
+    def get_crc(self, data):
+        import zlib
+        return zlib.crc32(data) & 0xffffffff
     
     def get_point(self, int x, int y, int z):
         color = self.get_color(x, y, z)
@@ -118,16 +122,17 @@ cdef class VXLData:
     
     def destroy_point(self, int x, int y, int z):
         if not self.get_solid(x, y, z) or z >= 62:
-            return False
+            return 0
         set_point(x, y, z, self.map, 0, 0)
+        count = 1
         start = time.time()
         for node_x, node_y, node_z in self.get_neighbors(x, y, z):
             if node_z < 62:
-                self.check_node(node_x, node_y, node_z, True)
+                count += self.check_node(node_x, node_y, node_z, True)
         taken = time.time() - start
         if taken > 0.1:
             print 'destroying block at', x, y, z, 'took:', taken
-        return True
+        return count
     
     def remove_point(self, int x, int y, int z):
         if is_valid_position(x, y, z):
@@ -166,7 +171,7 @@ cdef class VXLData:
                 neighbors.append((node_x, node_y, node_z))
         return neighbors
     
-    cpdef bint check_node(self, int x, int y, int z, bint destroy = False):
+    cpdef int check_node(self, int x, int y, int z, bint destroy = False):
         return check_node(x, y, z, self.map, destroy)
     
     cpdef bint build_point(self, int x, int y, int z, tuple color):
