@@ -128,7 +128,7 @@
         "trusted",
         "memcheck",
         "aimbot2",
-        "ratio"
+        "ratio",
         "htmlhelper",
         "blockinfo"
     ],
