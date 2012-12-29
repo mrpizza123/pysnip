@@ -1,27 +1,13 @@
-*.py[co]
-
-# Packages
-*.egg
-*.egg-info
-dist
+feature_server/logs/*
+feature_server/scripts/*
+feature_server/maps/*
+feature_server/qb
+feature_server/config.txt
 build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
-.installed.cfg
-
-# Installer logs
-pip-log.txt
-
-# Unit test / coverage reports
-.coverage
-.tox
-
-#Translations
-*.mo
-
-#Mr Developer
-.mr.developer.cfg
+enet/enet.c
+*.pyd
+*.pyc
+*.cpp
+*.txtc
+*.o
+*.def
