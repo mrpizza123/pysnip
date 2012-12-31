@@ -843,7 +843,7 @@ class FeatureProtocol(ServerProtocol):
             if has_connection:
                 self.master_connection.disconnect()
 
-    def add_ban(self, ip, reason, duration, name = None):
+    def add_ban(self, ip, reason, duration, name):
         """
         Ban an ip with an optional reason and duration in minutes. If duration 
         is None, ban is permanent.
