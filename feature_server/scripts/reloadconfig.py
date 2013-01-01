@@ -28,4 +28,5 @@ def apply_script(protocol, connection, config):
                 elif not password:
                     self.everyone_is_admin = True
             commands.rights.update(config.get('rights', {}))
+            script_names = config.get('scripts', [])
     return PassreloadProtocol, connection
