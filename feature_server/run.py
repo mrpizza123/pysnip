@@ -24,9 +24,11 @@ import os
 import json
 import itertools
 import random
+import datetime
 import time
 import shutil
 from collections import deque
+
 
 for index, name in enumerate(('config.txt', 'config.txt.default')):
     try:
@@ -145,7 +147,7 @@ class FeatureConnection(ServerConnection):
         protocol = self.protocol
         client_ip = self.address[0]
         try:
-            name, reason, timestamp = self.protocol.bans[client_ip]
+            name, reason, timestamp, now = self.protocol.bans[client_ip]
             if timestamp is not None and reactor.seconds() >= timestamp:
                 protocol.remove_ban(client_ip)
                 protocol.save_bans()
@@ -853,11 +855,12 @@ class FeatureProtocol(ServerProtocol):
             if get_network(connection.address[0]) in network:
                 name = connection.name
                 connection.kick(silent = True)
+                now = datetime.datetime.now()
         if duration:
             duration = reactor.seconds() + duration * 60
         else:
             duration = None
-        self.bans[ip] = (name or '(unknown)', reason, duration)
+        self.bans[ip] = (name or '(unknown)', reason, now.ctime(), duration)
         self.save_bans()
     
     def remove_ban(self, ip):
