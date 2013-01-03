@@ -29,6 +29,8 @@ import time
 import shutil
 from collections import deque
 
+now = datetime.datetime.now()
+
 
 for index, name in enumerate(('config.txt', 'config.txt.default')):
     try:
@@ -855,12 +857,11 @@ class FeatureProtocol(ServerProtocol):
             if get_network(connection.address[0]) in network:
                 name = connection.name
                 connection.kick(silent = True)
-                now = datetime.datetime.now()
         if duration:
             duration = reactor.seconds() + duration * 60
         else:
             duration = None
-        self.bans[ip] = (name or '(unknown)', reason, now.ctime(), duration)
+        self.bans[ip] = (name or '(unknown)', reason, duration, now.ctime())
         self.save_bans()
     
     def remove_ban(self, ip):

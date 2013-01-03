@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with pyspades.  If not, see <http://www.gnu.org/licenses/>.
 
+
 import math
 from random import choice
 from pyspades.constants import *
@@ -23,6 +24,9 @@ from pyspades.server import parse_command
 from twisted.internet import reactor
 from map import check_rotation
 import inspect
+import datetime
+import time
+
 
 
 commands = {}
@@ -152,17 +156,19 @@ def ban(connection, value, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     player = get_player(connection.protocol, value)
     player.ban(reason, duration)
-    
 
 @admin
 def banip(connection, ip, *arg):
     duration, reason = get_ban_arguments(connection, arg)
+    now = datetime.datetime.now()
     try:
-        connection.protocol.add_ban(ip, reason, duration)
+        connection.protocol.add_ban(ip, reason, duration, now.ctime())
     except ValueError:
         return 'Invalid IP address/network'
     reason = ': ' + reason if reason is not None else ''
     duration = duration or None
+    
+    
     if duration is None:
         return 'IP/network %s permabanned%s' % (ip, reason)
     else:

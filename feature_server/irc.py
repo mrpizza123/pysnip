@@ -165,7 +165,7 @@ class IRCBot(irc.IRCClient):
 class IRCClientFactory(protocol.ClientFactory):
     protocol = IRCBot
     lost_reconnect_delay = 10
-    failed_reconnect_delay = 20
+    failed_reconnect_delay = 10
     bot = None
     aliases = None
     colors = True
