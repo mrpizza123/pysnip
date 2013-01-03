@@ -162,7 +162,7 @@ def banip(connection, ip, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     now = datetime.datetime.now()
     try:
-        connection.protocol.add_ban(ip, reason, duration, now.ctime())
+        connection.protocol.add_ban(ip, reason,now.ctime(), duration)
     except ValueError:
         return 'Invalid IP address/network'
     reason = ': ' + reason if reason is not None else ''
