@@ -1,3 +1,7 @@
+# passreload.py
+# written by Danke
+
+import commands
 from commands import add, admin
 import json
 
@@ -12,9 +16,19 @@ def reloadconfig(connection):
         print 'Error reloading config:', v
         return 'Error reloading config. Check pyspades log for details.'
     connection.protocol.config.update(new_config)
+    connection.protocol.reload_passes()
     return 'Config reloaded!'
 
 add(reloadconfig)
 
 def apply_script(protocol, connection, config):
-    return protocol, connection
+    class PassreloadProtocol(protocol):
+        def reload_passes(self):
+            self.passwords = config.get('passwords', {})
+            for password in self.passwords.get('admin', []):
+                if password == 'replaceme':
+                    print 'REMEMBER TO CHANGE THE DEFAULT ADMINISTRATOR PASSWORD!'
+                elif not password:
+                    self.everyone_is_admin = True
+            commands.rights.update(config.get('rights', {}))
+    return PassreloadProtocol, connection
