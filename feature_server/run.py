@@ -406,7 +406,7 @@ class FeatureConnection(ServerConnection):
             message = '%s banned for %s%s' % (self.name,
                 prettify_timespan(duration * 60), reason)
         if self.protocol.on_ban_attempt(self, reason, duration):
-            self.protocol.send_chat(message, irc = True)
+            self.protocol.irc_say('* %s  %s' % (self.name, message))
             self.protocol.on_ban(self, reason, duration)
             if self.address[0]=="127.0.0.1":
                 self.protocol.send_chat("Ban ignored: localhost")
