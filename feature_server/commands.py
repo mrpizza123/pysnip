@@ -917,6 +917,7 @@ def server_info(connection):
         msg += ' at %s' % protocol.identifier
     return msg
 
+@admin
 def scripts(connection):
     scripts = connection.protocol.config.get('scripts', [])
     return 'Scripts enabled: %s' % (', '.join(scripts))
@@ -935,6 +936,15 @@ def weapon(connection, value):
     else:
         name = player.weapon_object.name
     return '%s has a %s' % (player.name, name)
+def hp(connection, player_name):
+    try:
+        player = get_player(connection.protocol, player_name, False)
+    except InvalidPlayer:
+        return 'Invalid player'
+    except InvalidSpectator:
+        return 'Player is a spectator'
+    
+    return "%s's HP is: %i" % (player.name, player.hp)
     
 command_list = [
     help,
@@ -996,7 +1006,8 @@ command_list = [
     server_info,
     scripts,
     weapon,
-    mapname
+    mapname,
+    hp
 ]
 
 def add(func, name = None):
@@ -1024,6 +1035,7 @@ try:
     import pygeoip
     database = pygeoip.GeoIP('./data/GeoLiteCity.dat')
     
+    @admin
     @name('from')
     def where_from(connection, value = None):
         if value is None:

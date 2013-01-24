@@ -122,10 +122,13 @@
         "chatprefix" : "."
     },
     "scripts" : [
+        "analyze",
+        "banhammer",
+        "aimbotsnatcher",
+        "checkban"
         "rollback",
         "protect",
         "map_extensions",
-        "disco",
         "votekick",
         "trusted",
         "ratio",
