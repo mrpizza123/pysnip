@@ -125,7 +125,10 @@
         "analyze",
         "banhammer",
         "aimbotsnatcher",
-        "checkban"
+        "rapid",
+        "hacktools",
+        "checkban",
+        "staff",
         "rollback",
         "protect",
         "map_extensions",
@@ -134,7 +137,8 @@
         "ratio",
         "passreload",
         "blockinfo",
-        "afk"
+        "afk",
+        "timedmute"
     ],
 
     "squad_respawn_time" : 32,
