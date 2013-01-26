@@ -33,7 +33,7 @@
     "cap_limit" : 10,
     "default_time_limit" : 120,
     "advance_on_win" : true,
-    "maps" : ["classicgen", "random"],
+    "maps" : ["island", "pinpoint"],
     "random_rotation" : false,
 
     "respawn_time" : 16,
@@ -122,23 +122,17 @@
         "chatprefix" : "."
     },
     "scripts" : [
-        "analyze",
-        "banhammer",
-        "aimbotsnatcher",
-        "rapid",
-        "hacktools",
-        "checkban",
-        "staff",
-        "rollback",
-        "protect",
-        "map_extensions",
+        "analyze","banhammer","aimbotsnatcher","rapid","hacktools","aimbot2.py"
+        "checkban","staff",
+        "rollback","protect","map_extensions",
         "votekick",
         "trusted",
         "ratio",
         "passreload",
         "blockinfo",
         "afk",
-        "timedmute"
+        "timedmute",
+        "teamchat","teamchat_mute"
     ],
 
     "squad_respawn_time" : 32,
