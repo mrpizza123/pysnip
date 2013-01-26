@@ -149,7 +149,7 @@ int check_node(int x, int y, int z, MapData * map, int destroy)
         z = current_node->z;
         if (z >= 62) {
             marked.clear();
-            return 0;
+            return 1;
         }
         x = current_node->x;
         y = current_node->y;
@@ -179,9 +179,9 @@ int check_node(int x, int y, int z, MapData * map, int destroy)
             map->colors.erase(*iter);
         }
     }
-    int ret = (int)marked.size();
+    
     marked.clear();
-    return ret;
+    return 0;
 }
 
 // write_map/save_vxl function from stb/nothings - thanks a lot for the 

@@ -33,7 +33,7 @@ MAX_SERVER_NAME_SIZE = 31
 MAX_MAP_NAME_SIZE = 20
 MAX_GAME_MODE_SIZE = 7
 
-HOST = 'master.buildandshoot.com'
+HOST = '199.195.254.202'
 
 if STAGING:
     PORT = 32885
@@ -102,17 +102,14 @@ class MasterConnection(BaseConnection):
 
 from pyspades.web import getPage
 
-IP_GETTER = 'http://services.spadille.net/getip'
+IP_GETTER = 'http://forum.minit.nu/ip.php'
 
 def get_external_ip(interface = ''):
     return getPage(IP_GETTER, bindAddress = (interface, 0))
 
-import socket
-
 def get_master_connection(protocol):
     defer = Deferred()
-    master_ip = socket.gethostbyname(HOST)
-    connection = protocol.connect(MasterConnection, master_ip, PORT, MASTER_VERSION)
+    connection = protocol.connect(MasterConnection, HOST, PORT, MASTER_VERSION)
     connection.server_protocol = protocol
     connection.defer = defer
     return defer

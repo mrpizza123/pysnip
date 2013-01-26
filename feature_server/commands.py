@@ -1035,7 +1035,7 @@ try:
     import pygeoip
     database = pygeoip.GeoIP('./data/GeoLiteCity.dat')
     
-    @admin
+    
     @name('from')
     def where_from(connection, value = None):
         if value is None:
