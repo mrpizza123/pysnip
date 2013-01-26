@@ -128,7 +128,7 @@
         "votekick",
         "trusted",
         "ratio",
-        "passreload",
+        "reloadconfig",
         "blockinfo",
         "afk",
         "timedmute",
