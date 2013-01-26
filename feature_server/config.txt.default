@@ -122,9 +122,9 @@
         "chatprefix" : "."
     },
     "scripts" : [
-        "analyze","banhammer","aimbotsnatcher","rapid","hacktools","aimbot2.py"
-        "checkban","staff",
-        "rollback","protect","map_extensions",
+        "analyze", "banhammer", "aimbotsnatcher", "rapid", "hacktools", "aimbot2.py"
+        "checkban", "staff",
+        "rollback", "protect", "map_extensions",
         "votekick",
         "trusted",
         "ratio",
@@ -132,7 +132,7 @@
         "blockinfo",
         "afk",
         "timedmute",
-        "teamchat","teamchat_mute"
+        "teamchat", "teamchat_mute"
     ],
 
     "squad_respawn_time" : 32,
