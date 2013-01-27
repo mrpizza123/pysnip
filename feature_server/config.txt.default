@@ -105,7 +105,7 @@
         "cancel", "unstick", "togglevotekick", "trust", "from",
         "teleport_other", teleport", "tpsilent", "move", "switch", "goto", "invisible", "where",
         "fog", "scripts",
-        "togglebuild", "togglekill"
+        "togglebuild", "togglekill", "allowbuild", "disablebuild"
         ]
     },
     "ssh" : {
