@@ -156,6 +156,26 @@ def ban(connection, value, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     player = get_player(connection.protocol, value)
     player.ban(reason, duration)
+@admin
+def hban(connection, value, *arg):
+    duration = int(60)
+    reason = join_arguments(arg)
+    player = get_player(connection.protocol, value)
+    player.ban(reason, duration)
+
+@admin
+def dban(connection, value, *arg):
+    duration = int(1440)
+    reason = join_arguments(arg)
+    player = get_player(connection.protocol, value)
+    player.ban(reason, duration)
+
+@admin
+def wban(connection, value, *arg):
+    duration = int(10080)
+    reason = join_arguments(arg)
+    player = get_player(connection.protocol, value)
+    player.ban(reason, duration)
 
 @admin
 def banip(connection, ip, *arg):
@@ -957,6 +977,9 @@ command_list = [
     who_was,
     fog,
     ban,
+    hban,
+    dban,
+    wban,
     banip,
     unban,
     undo_ban,
