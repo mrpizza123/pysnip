@@ -127,7 +127,7 @@
         "enabled" : true,
          "urls" : [
              ["http://www.blacklist.spadille.net/subscribe.json", []],
-			 ["http://forum.minit.nu/superbanlist.json", []]
+	     ["http://forum.minit.nu/superbanlist.json", []]
         ]
     },
     "irc" : {
