@@ -85,8 +85,8 @@
         "trusted" : ["trustedpass"]
     },
     "rights" : {
-        "moderator" : ["advance", "cancel", "dban", "fog", "from", "goto", "hackinfo", "hban", "invisible", "ip", "kick", "kickafk", "kill", "map", "master", "move", "mute", "resetgame", "switch", "teleport", "teleport_other", "tpsilent", "togglebuild", "togglekill", "togglevotekick", "trust", "undoban", "unmute", "unstick", "where", "whowas"],
-        "guard" : ["cancel", "fog", "from", "goto", "hackinfo", "hban", "ip", "kick", "kickafk", "kill", "move", "mute", "switch", "teleport", "teleport_other", "togglebuild", "togglekill", "togglevotekick", "trust", "unmute", "unstick", "where", "whowas"]
+        "moderator" : ["tm","staff","reloadconfig","rapid","srap","an","advance", "cancel", "dban", "fog", "from", "goto", "hackinfo", "hban", "invisible", "ip", "kick", "kickafk", "kill", "map", "master", "move", "mute", "resetgame", "switch", "teleport", "teleport_other", "tpsilent", "togglebuild", "togglekill", "togglevotekick", "trust", "undoban", "unmute", "unstick", "where", "whowas","check"],
+        "guard" : ["tm","staff","reloadconfig","rapid","srap","an","cancel", "fog", "from", "goto", "hackinfo", "hban", "ip", "kick", "kickafk", "kill", "move", "mute", "switch", "teleport", "teleport_other", "togglebuild", "togglekill", "togglevotekick", "trust", "unmute", "unstick", "where", "whowas"]
     },
     "ssh" : {
         "enabled" : false,
@@ -122,7 +122,7 @@
         "chatprefix" : "."
     },
     "scripts" : [
-        "analyze", "banhammer", "aimbotsnatcher", "rapid", "hacktools", "aimbot2",
+        "analyze", "banhammer", "aimbotsnatcher", "rapid", "aimbot2",
         "checkban", "staff", "reloadconfig",
         "rollback", "protect", "map_extensions",
         "votekick", "trusted",
