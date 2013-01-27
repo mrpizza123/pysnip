@@ -134,7 +134,7 @@
         "nickname" : "PySnip",
         "username" : "PySnip",
         "realname" : "PySnip",
-        "server" : "irc.quakenet.org",
+        "server" : "irc.minit.nu",
         "port" : 6667,
         "channel" : "#MyServerChannel",
         "password" : "",
@@ -150,7 +150,7 @@
         "blockinfo",
         "afk",
         "timedmute",
-        "teamchat", "teamchat_mute"
+        "teamchat", "teamchat_mute", "alias"
     ],
 
     "squad_respawn_time" : 32,
