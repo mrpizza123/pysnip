@@ -21,7 +21,7 @@ def namealias(connection, value):
 			if len(aliaslist) == 0:
 				return 'No know aliases of %s' % player.name
 			return 'Known aliases of %s: %s' % (player.name,', '.join(map(str,aliaslist)))
-add(alias)
+add(namealias)
 
 @alias('ipalias')
 def alias(connection, value):
@@ -37,6 +37,7 @@ def alias(connection, value):
 			if len(aliaslist) == 0:
 				return 'No know aliases of %s' % ip
 	        return 'Known aliases of %s: %s' % (ip,', '.join(map(str,aliaslist)))
+add(ipalias)
 
 
 def apply_script(protocol, connection, config):
