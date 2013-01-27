@@ -86,26 +86,26 @@
     },
     "rights" : {
         "moderator" : [
-        "tm","mute","timedmute","unmute",
-        "an","srap","rapid",
-        "check","staff","reloadconfig",,
-        "hban","dban","undoban","whowas", "ip", "kick", "kickafk",
-        "hackinfo", "kill",
-        "cancel","unstick","togglevotekick","trust", "from",
-        "teleport_other","tpsilent","teleport","goto","where", "invisible","move","switch",
-        "advance","fog","map", "master", "resetgame",
-        "togglebuild","togglekill"
+        "tm", "mute", "timedmute", "unmute",
+        "an", "srap", "rapid",
+        "check", "staff", "reloadconfig",,
+        "hban", "dban", "wban", "undoban", "whowas", "ip", "kick", "kickafk",
+        "hackinfo", "kill", 
+        "cancel", "unstick", "togglevotekick", "trust", "from",
+        "teleport_other", "tpsilent", "teleport", "goto", "where", "invisible", "move", "switch",
+        "advance", "fog", "map", "master", "resetgame", "scripts",
+        "togglebuild", "togglekill"
         ],
         "guard" : [
-        "tm","mute","timedmute","unmute",
-        "an","srap","rapid",
-        "check","staff","reloadconfig",
-        "hban","ip", "kick", "kickafk", "whowas",
-        "hackinfo", "kill",
-        "cancel", "unstick", "togglevotekick","trust", "from",
+        "tm", "mute", "timedmute", "unmute",
+        "an", "srap", "rapid",
+        "check", "staff", "reloadconfig",
+        "hban", "ip", "kick", "kickafk", "whowas",
+        "hackinfo", "kill", 
+        "cancel", "unstick", "togglevotekick", "trust", "from",
         "teleport_other", teleport", "tpsilent", "move", "switch", "goto", "invisible", "where",
-        "fog",
-        "togglebuild","togglekill"
+        "fog", "scripts"
+        "togglebuild", "togglekill"
         ]
     },
     "ssh" : {
