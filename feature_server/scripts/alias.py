@@ -34,9 +34,9 @@ def alias(connection, value):
 		if player.address[0] == ip[0]:
 			del ip[0]
 	        aliaslist = filter( lambda a: a.lower() != player_name and (duplicate_test_name_pattern.match(a) is not None or a != player_name[:-1]), ip)
-			if len(aliaslist) == 0:
-				return 'No know aliases of %s' % ip
-	        return 'Known aliases of %s: %s' % (ip,', '.join(map(str,aliaslist)))
+	    if len(aliaslist) == 0:
+		    return 'No know aliases of %s' % ip
+	    return 'Known aliases of %s: %s' % (ip,', '.join(map(str,aliaslist)))
 add(ipalias)
 
 
