@@ -94,7 +94,7 @@
         "cancel", "unstick", "togglevotekick", "trust", "from",
         "teleport_other", "tpsilent", "teleport", "goto", "where", "invisible", "move", "switch",
         "advance", "fog", "map", "master", "resetgame", "scripts",
-        "togglebuild", "togglekill"
+        "togglebuild", "togglekill", "allowbuild", "disablebuild"
         ],
         "guard" : [
         "tm", "mute", "timedmute", "unmute",
