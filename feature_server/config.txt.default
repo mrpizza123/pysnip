@@ -103,7 +103,7 @@
         "hban", "ip", "kick", "kickafk", "whowas",
         "hackinfo", "kill", 
         "cancel", "unstick", "togglevotekick", "trust", "from",
-        "teleport_other", teleport", "tpsilent", "move", "switch", "goto", "invisible", "where",
+        "teleport_other", "teleport", "tpsilent", "move", "switch", "goto", "invisible", "where",
         "fog", "scripts",
         "togglebuild", "togglekill", "allowbuild", "disablebuild"
         ]
