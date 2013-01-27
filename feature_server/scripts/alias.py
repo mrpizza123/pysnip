@@ -7,7 +7,7 @@ duplicate_test_name_pattern = re.compile(".*(\d)$")
 
 @alias('aliases')
 @admin
-def alias(connection, value):
+def aliases(connection, value):
 	try:
             	aliases = json.load(open('aliases.txt', 'rb'))
         except IOError:
