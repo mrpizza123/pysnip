@@ -88,7 +88,7 @@
         "moderator" : [
         "tm", "mute", "timedmute", "unmute",
         "an", "srap", "rapid",
-        "check", "staff", "reloadconfig",
+        "check", "staff", "reloadconfig", "aliases",
         "hban", "dban", "wban", "undoban", "whowas", "ip", "kick", "kickafk",
         "hackinfo", "kill", 
         "cancel", "unstick", "togglevotekick", "trust", "from",
@@ -99,7 +99,7 @@
         "guard" : [
         "tm", "mute", "timedmute", "unmute",
         "an", "srap", "rapid",
-        "check", "staff", "reloadconfig",
+        "check", "staff", "reloadconfig", "aliases",
         "hban", "ip", "kick", "kickafk", "whowas",
         "hackinfo", "kill", 
         "cancel", "unstick", "togglevotekick", "trust", "from",
@@ -127,7 +127,7 @@
         "enabled" : true,
          "urls" : [
              ["http://www.blacklist.spadille.net/subscribe.json", []],
-			 ["http://forum.minit.nu/superbanlist.json", []]
+	     ["http://forum.minit.nu/superbanlist.json", []]
         ]
     },
     "irc" : {
