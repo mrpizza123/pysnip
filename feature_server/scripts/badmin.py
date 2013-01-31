@@ -20,7 +20,7 @@ SCORE_GRIEF_WARN = 6
 #turns on setting preventing blank votekicks
 BLANK_VOTEKICK_ENABLED = False
 
-grief_pattern = re.compile(".*(gr.*f.*(ing|er)|grief|destroy).*", re.IGNORECASE)
+grief_pattern = re.compile(".*(gr.*f.*(ing|er)|grief|destroy|gief|geif|giraf).*",, re.IGNORECASE)
 
 def grief_match(player, msg):
 	return (not grief_pattern.match(msg) is None)
@@ -98,7 +98,7 @@ def score_grief(connection, player, time=None): #302 = blue (0), #303 = green (1
         gscore += 2
     elif team_blocks > 10 and team_blocks <= 25:
         gscore += 4
-    elif team_blocks > 25 and team_blocks <= 50:
+    elif team_blocks > 25 and team_blocks <= 100:
         gscore += 6
     elif team_blocks > 50:
         gscore += 10
@@ -110,8 +110,8 @@ def score_grief(connection, player, time=None): #302 = blue (0), #303 = green (1
         gscore += 1
     elif ttr > 20 and ttr <= 50:
         gscore += 2
-    elif ttr > 50 and ttr <= 80:
-        gscore += 3
+    elif ttr > 40 and ttr <= 100:
+        gscore += 6
     elif ttr > 80:
         gscore += 4
     print "ttr set"
