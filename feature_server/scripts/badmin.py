@@ -151,4 +151,4 @@ def apply_script(protocol, connection, config):
                     badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
             return protocol.start_votekick(self, connection, player, reason)
     
-return BadminProtocol
+   return BadminProtocol
