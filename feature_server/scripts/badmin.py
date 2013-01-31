@@ -138,7 +138,7 @@ def check_percent(self):
 
 def apply_script(protocol, connection, config):
     def badmin_punish(connection, punishment='warn', reason = "Possible Greifer"):
-        connection.protocol.irc_say("* %s is being punished. Type: %s (Reason: %s)" % (connection.name, Warn, reason))
+        connection.protocol.irc_say("* %s is being punished. Type: %s (Reason: %s)" % (connection.name, punishment, reason))
         if punishment == "warn":
             player.send_chat("Hey %s, %s" % (connection.name, reason))
 
@@ -149,6 +149,6 @@ def apply_script(protocol, connection, config):
                 score = score_grief(connection, player)
                 if score >= SCORE_GRIEF_WARN:
                     badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
-                    return protocol.start_votekick(self, connection, player, reason)
+            return protocol.start_votekick(self, connection, player, reason)
     
     return BadminProtocol
