@@ -141,13 +141,13 @@ def badmin_punish(connection, punishment='warn', reason = "Being a meany face"):
         if punishment == "warn":
             connection.protocol.send_chat(" @Badmin: Hey %s, %s" % (connection.name, reason))
    
-   class BadminProtocol(protocol):
-        def start_votekick(self, connection, player, reason = None):
-            if grief_match(self, reason) and SCORE_GRIEF_ENABLED == True:
-                #print "made grief check"
-                score = score_grief(connection, player)
-                if score >= SCORE_GRIEF_WARN:
-                    badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
+class BadminProtocol(protocol):
+    def start_votekick(self, connection, player, reason = None):
+        if grief_match(self, reason) and SCORE_GRIEF_ENABLED == True:
+            #print "made grief check"
+            score = score_grief(connection, player)
+            if score >= SCORE_GRIEF_WARN:
+                badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
     return protocol.start_votekick(self, connection, player, reason)
     
-    return BadminProtocol
+return BadminProtocol
