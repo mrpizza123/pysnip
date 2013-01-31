@@ -1,7 +1,7 @@
 ###Badmin is an bot admin.  He'll do a variety of common admin tasks so you don't have to.
 ###He might not always get it right, but he'll get it done, and isn't that what really matters?
 ###-Requirements: blockinfo.py (for grief detection), ratio.py (for k/d ratio), aimbot2.py (hit accuracy)
-###-Modified by Color to take out auto-kick, aimbot detection, slur detection, auto stuff
+###-Modified by Color to take out auto-kick, aimbot detection, slur detection, auto stuff, keep warn.
 
 from twisted.internet import reactor
 from pyspades.common import prettify_timespan
@@ -12,6 +12,9 @@ import re
 BADMIN_VERSION = 9
 #Settings for auto-griefcheck
 SCORE_GRIEF_ENABLED = True
+#any votekicks under uncertain will be cancelled
+SCORE_GRIEF_WARN = 6
+
 
 #Settings for blank reason votekicks
 #turns on setting preventing blank votekicks
@@ -25,10 +28,8 @@ def grief_match(player, msg):
 @admin
 def badmin(connection, var=None):
     if var == None:
-        return ("@Badmin (r%s): Language Filter(LF) [%s], Blank Votekick Blocker(BV) "
-        "[%s], Grief Votekick Protection(GV) [%s], Aimbot Votekick Protection(AV) [%s]" 
-        % (BADMIN_VERSION, LANGUAGE_FILTER_ENABLED, BLANK_VOTEKICK_ENABLED, 
-        SCORE_GRIEF_ENABLED, SCORE_AIMBOT_ENABLED))
+        return ("@Badmin (r%s): "Grief Votekick Protection(GV) [%s]" 
+        % (BADMIN_VERSION, SCORE_GRIEF_ENABLED))
 add(badmin)
 
 @admin
