@@ -18,7 +18,7 @@ SCORE_GRIEF_WARN = 6
 
 #Settings for blank reason votekicks
 #turns on setting preventing blank votekicks
-BLANK_VOTEKICK_ENABLED = True
+BLANK_VOTEKICK_ENABLED = False
 
 grief_pattern = re.compile(".*(gr.*f.*(ing|er)|grief|destroy).*", re.IGNORECASE)
 
