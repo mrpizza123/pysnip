@@ -151,9 +151,6 @@ def apply_script(protocol, connection, config):
 
     class BadminProtocol(protocol):
         def start_votekick(self, connection, player, reason = None):
-            if reason == None and BLANK_VOTEKICK_ENABLED == True:
-                connection.protocol.irc_say("* @Badmin: %s is attempting a blank votekick (against %s)" % (connection.name, player.name))
-                return "You must input a reason for the votekick (/votekick name reason)"
             if grief_match(self, reason) and SCORE_GRIEF_ENABLED == True:
                 #print "made grief check"
                 score = score_grief(connection, player)
