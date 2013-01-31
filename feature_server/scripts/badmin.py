@@ -136,11 +136,11 @@ def check_percent(self):
         else:
             return float(self.shotgun_hits)/float(self.shotgun_count)
 
-def apply_script(protocol, connection, config):
-    def badmin_punish(connection, punishment='warn', reason = "Possible Greifer"):
-        connection.protocol.irc_say("* %s is being punished. Type: %s (Reason: %s)" % (connection.name, punishment, reason))
+def badmin_punish(connection, punishment='warn', reason = "Being a meany face"):
+        connection.protocol.irc_say("* @Badmin: %s is being punished. Type: %s (Reason: %s)" % (connection.name, punishment, reason))
         if punishment == "warn":
-            player.send_chat("Hey %s, %s" % (connection.name, reason))
+            connection.protocol.send_chat(" @Badmin: Hey %s, %s" % (connection.name, reason))
+
 
     class BadminProtocol(protocol):
         def start_votekick(self, connection, player, reason = None):
