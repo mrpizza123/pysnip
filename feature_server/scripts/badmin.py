@@ -150,7 +150,7 @@ def apply_script(protocol, connection, config):
     def badmin_punish(connection, punishment='warn', reason = "Please stop Griefing."):
         connection.protocol.irc_say("* @Badmin: %s is being punished. Type: %s (Reason: %s)" % (connection.name, punishment, reason))
         if punishment == "warn":
-            player.send_chat("Hey %s, %s" % (connection.name, reason))
+            connection.protocol.send_chat("Hey %s, %s" % (connection.name, reason))
 
     class BadminConnection(connection):
         def on_chat(self, value, global_message):
@@ -161,7 +161,7 @@ def apply_script(protocol, connection, config):
         def start_votekick(self, connection, player, reason = None):
             if reason == None and BLANK_VOTEKICK_ENABLED == True:
                 connection.protocol.irc_say("* @Badmin: %s is attempting a blank votekick (against %s)" % (connection.name, player.name))
-                return "@Badmin: You must input a reason for the votekick (/votekick name reason)"
+                return "You must input a reason for the votekick (/votekick name reason)"
             if grief_match(self, reason) and SCORE_GRIEF_ENABLED == True:
                 #print "made grief check"
                 score = score_grief(connection, player)
@@ -173,7 +173,7 @@ def apply_script(protocol, connection, config):
                     return protocol.start_votekick(self, connection, player, reason)
                 if score < SCORE_GRIEF_UNCERTAIN:
                     connection.protocol.irc_say("* @Badmin: I've cancelled a griefing votekick! Kicker: %s, Kickee: %s, Score: %s" % (connection.name, player.name, score))
-                    return "@Badmin: This player has not been griefing."
+                    return "This player has not been griefing."
             return protocol.start_votekick(self, connection, player, reason)
     
     return BadminProtocol, BadminConnection
