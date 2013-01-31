@@ -145,9 +145,8 @@ def apply_script(protocol, config):
 	class BadminProtocol(protocol):
         if grief_match(self, reason) and SCORE_GRIEF_ENABLED == True:
             #print "made grief check"
-                score = score_grief(connection, player)
-            if score >= SCORE_GRIEF_WARN:
-                badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
-        return protocol.start_votekick(self, connection, player, reason)
+            score = score_grief(connection, player)
+        if score >= SCORE_GRIEF_WARN:
+            badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
     
     return BadminProtocol
