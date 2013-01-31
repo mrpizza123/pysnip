@@ -140,9 +140,8 @@ def badmin_punish(connection, punishment='warn', reason = "Being a meany face"):
         connection.protocol.irc_say("* @Badmin: %s is being punished. Type: %s (Reason: %s)" % (connection.name, punishment, reason))
         if punishment == "warn":
             connection.protocol.send_chat(" @Badmin: Hey %s, %s" % (connection.name, reason))
-
-
-    class BadminProtocol(protocol):
+   
+   class BadminProtocol(protocol):
         def start_votekick(self, connection, player, reason = None):
             if grief_match(self, reason) and SCORE_GRIEF_ENABLED == True:
                 #print "made grief check"
