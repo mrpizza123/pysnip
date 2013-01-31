@@ -136,7 +136,7 @@ def check_percent(self):
         else:
             return float(self.shotgun_hits)/float(self.shotgun_count)
 
-def apply_script(protocol, connection, config):
+def apply_script(protocol,config):
     def badmin_punish(connection, punishment='warn', reason = "Being a meany face"):
         connection.protocol.irc_say("* @Badmin: %s is being punished. Type: %s (Reason: %s)" % (connection.name, punishment, reason))
         if punishment == "warn":
