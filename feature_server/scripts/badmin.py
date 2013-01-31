@@ -150,4 +150,4 @@ class BadminProtocol(protocol):
                 badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
         return protocol.start_votekick(self, connection, player, reason)
     
-return BadminProtocol
+    return BadminProtocol
