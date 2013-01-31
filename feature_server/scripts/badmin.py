@@ -13,12 +13,7 @@ BADMIN_VERSION = 9
 #Settings for auto-griefcheck
 SCORE_GRIEF_ENABLED = True
 #any votekicks under uncertain will be cancelled
-SCORE_GRIEF_WARN = 6
-
-
-#Settings for blank reason votekicks
-#turns on setting preventing blank votekicks
-BLANK_VOTEKICK_ENABLED = True
+SCORE_GRIEF_WARN = 3
 
 grief_pattern = re.compile(".*(gr.*f.*(ing|er)|grief|destroy).*", re.IGNORECASE)
 
@@ -29,7 +24,7 @@ def grief_match(player, msg):
 def badmin(connection, var=None):
     if var == None:
         return ("@Badmin (r%s): "Grief Votekick Protection(GV) [%s]" 
-        % (BADMIN_VERSION, SCORE_GRIEF_ENABLED))
+		% (BADMIN_VERSION, SCORE_GRIEF_ENABLED))
 add(badmin)
 
 @admin
@@ -96,9 +91,9 @@ def score_grief(connection, player, time=None): #302 = blue (0), #303 = green (1
         gscore += 1
     elif team_blocks > 5 and team_blocks <= 10:
         gscore += 2
-    elif team_blocks > 10 and team_blocks <= 25:
+    elif team_blocks > 20 and team_blocks <= 100:
         gscore += 4
-    elif team_blocks > 25 and team_blocks <= 50:
+    elif team_blocks > 25 and team_blocks <= 100:
         gscore += 6
     elif team_blocks > 50:
         gscore += 10
@@ -110,18 +105,16 @@ def score_grief(connection, player, time=None): #302 = blue (0), #303 = green (1
         gscore += 1
     elif ttr > 20 and ttr <= 50:
         gscore += 2
-    elif ttr > 50 and ttr <= 80:
-        gscore += 3
-    elif ttr > 80:
+    elif ttr > 35 and ttr <= 100:
         gscore += 4
+    elif ttr > 80:
+        gscore += 6
     print "ttr set"
     #teammates harmed check
     if team_harmed == 1:
         gscore += 1
-    elif team_harmed > 2 and team_harmed <= 4:
-        gscore += 3
-    elif team_harmed > 4:
-        gscore += 6
+    elif team_harmed > 2 and team_harmed <= 9:
+        gscore += 4
     print "team harmed set"
     print "mb: %s, tb: %s, eb: %s, Tb: %s, th: %s, ttr: %s, eh: %s, gs: %s" % (map_blocks, team_blocks, enemy_blocks, total_blocks, team_harmed, ttr, enemy_harmed, gscore)
     return gscore
@@ -144,10 +137,10 @@ def check_percent(self):
             return float(self.shotgun_hits)/float(self.shotgun_count)
 
 def apply_script(protocol, connection, config):
-    def badmin_punish(connection, punishment='warn', reason = "Being a meany face"):
+    def badmin_punish(connection, punishment='warn', reason = "Possible Greifer"):
         connection.protocol.irc_say("* %s is being punished. Type: %s (Reason: %s)" % (connection.name, punishment, reason))
         if punishment == "warn":
-            connection.protocol.send_chat(" @Badmin: Hey %s, %s" % (connection.name, reason))
+            player.send_chat("Hey %s, %s" % (connection.name, reason))
 
     class BadminProtocol(protocol):
         def start_votekick(self, connection, player, reason = None):
