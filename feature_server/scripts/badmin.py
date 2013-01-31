@@ -142,11 +142,3 @@ def apply_script(protocol, config):
         if punishment == "warn":
             connection.protocol.send_chat(" @Badmin: Hey %s, %s" % (connection.name, reason))
     
-	class BadminProtocol(protocol):
-        if grief_match(self, reason) and SCORE_GRIEF_ENABLED == True:
-            #print "made grief check"
-            score = score_grief(connection, player)
-        if score >= SCORE_GRIEF_WARN:
-            badmin_punish(player, "warn", "Stop Griefing! (GS: %s)" % score)
-    
-    return BadminProtocol
