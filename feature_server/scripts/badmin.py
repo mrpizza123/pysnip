@@ -23,7 +23,7 @@ def grief_match(player, msg):
 @admin
 def badmin(connection, var=None):
     if var == None:
-        return ("@Badmin (r%s): "Grief Votekick Protection(GV) [%s]" 
+        return ("@Badmin (r%s): "Grief Votekick Protection(GV)"[%s]" 
 		% (BADMIN_VERSION, SCORE_GRIEF_ENABLED))
 add(badmin)
 
