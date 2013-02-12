@@ -157,7 +157,6 @@ def ban(connection, value, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     player = get_player(connection.protocol, value)
     player.ban(reason, duration)
-	reason = '[Username: %s] [Banned by: %s] [Date: %s] [Duration: %s]' % (player.name, self.name, now, duration}
 @admin
 def hban(connection, value, *arg):
     duration = int(60)
