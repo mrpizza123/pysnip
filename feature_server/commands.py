@@ -17,6 +17,8 @@
 
 
 import math
+import datetime
+import time
 from random import choice
 from pyspades.constants import *
 from pyspades.common import prettify_timespan
@@ -24,8 +26,7 @@ from pyspades.server import parse_command
 from twisted.internet import reactor
 from map import check_rotation
 import inspect
-import datetime
-import time
+
 
 now = datetime.datetime.now()
 
