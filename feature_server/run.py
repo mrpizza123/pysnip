@@ -24,8 +24,6 @@ import os
 import json
 import itertools
 import random
-import datetime
-import time
 import shutil
 from collections import deque
 
@@ -861,7 +859,7 @@ class FeatureProtocol(ServerProtocol):
             duration = reactor.seconds() + duration * 60
         else:
             duration = None
-        self.bans[ip] = (name or '(unknown)', reason, duration, now.ctime())
+        self.bans[ip] = (name or '(unknown)', reason, duration)
         self.save_bans()
     
     def remove_ban(self, ip):

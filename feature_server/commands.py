@@ -27,7 +27,7 @@ import inspect
 import datetime
 import time
 
-
+now = datetime.datetime.now()
 
 commands = {}
 aliases = {}
@@ -156,6 +156,7 @@ def ban(connection, value, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     player = get_player(connection.protocol, value)
     player.ban(reason, duration)
+	reason = '[Username: %s] [Banned by: %s] [Date: %s] [Duration: %s]' % (player.name, self.name, now, duration}
 @admin
 def hban(connection, value, *arg):
     duration = int(60)
@@ -995,7 +996,8 @@ def staff(connection):
         else:
             connection.send_chat("[A]dmin [M]oderator [G]uard [T]rusted")
     return admin_message	
-    
+
+        	    
 command_list = [
     help,
     pm,

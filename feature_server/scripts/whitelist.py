@@ -24,9 +24,6 @@ def wlget(connection, ip):
     return connection.protocol.wl_get(connection, ip)
 commands.add(wlget)
 
-# It also slices toast!
-@commands.admin
-
 def apply_script(protocol, connection, config):
     class WhitelistProtocol(protocol):
         def __build_dictwrapper(self, wrapped, wlcall):
