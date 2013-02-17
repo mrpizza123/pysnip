@@ -411,6 +411,7 @@ class FeatureConnection(ServerConnection):
             else:
                 self.protocol.add_ban(self.address[0], reason, duration,
                                       self.name)
+		return '* %s  %s' % message					  
 
     def send_lines(self, lines):
         current_time = 0

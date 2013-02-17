@@ -156,7 +156,7 @@ def get_ban_arguments(connection, arg):
 def ban(connection, value, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     player = get_player(connection.protocol, value)
-    player.ban(reason, duration)
+	player.ban(reason, duration)
 @admin
 def hban(connection, value, *arg):
     duration = int(60)
@@ -510,7 +510,7 @@ def toggle_teamkill(connection):
     connection.protocol.send_chat('Friendly fire has been toggled %s!' % on_off)
     connection.protocol.irc_say('* %s toggled friendly fire %s' % (
         connection.name, on_off))
-
+		
 @admin
 def mute(connection, value):
     player = get_player(connection.protocol, value)
