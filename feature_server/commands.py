@@ -156,7 +156,7 @@ def get_ban_arguments(connection, arg):
 def ban(connection, value, *arg):
     duration, reason = get_ban_arguments(connection, arg)
     player = get_player(connection.protocol, value)
-	player.ban(reason, duration)
+    player.ban(reason, duration)
 
 @admin
 def hban(connection, value, *arg):
