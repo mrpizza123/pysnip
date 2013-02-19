@@ -391,7 +391,7 @@ class FeatureConnection(ServerConnection):
             else:
                 message = '%s was kicked' % self.name
             self.protocol.send_chat(message, irc = False)
-	    self.protocol.irc_say('%s has been kicked by %s : %s ' % (player.name, connection.name, reason))
+	    self.protocol.irc_say('%s has been kicked by %s : %s ' % (self.name, connection.name, reason))
         # FIXME: Client should handle disconnect events the same way in both
         # main and initial loading network loops
         self.disconnect(ERROR_KICKED + 8)
