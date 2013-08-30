@@ -54,7 +54,7 @@ def apply_script(protocol, connection, config):
                 self.illegal_dt_count = 0
                 self.dt_reset_count = 0
                 self.mb_event_count = 0
-                self.ban('Hack Detected - Multiple Bullets  IGN: %s #%d' % (self.name, self.player_id), 10080)
+                self.ban('Hack Detected - Multiple Bullets  IGN: %s #%d' % (self.name, self.player_id), 0)
                 return False
                 
                 
@@ -204,7 +204,7 @@ def apply_script(protocol, connection, config):
                                     if smg_snap_timer >= 180:
                                         self.smg_snap_count = 1
                     if self.smg_snap_count >= 7:
-                        self.ban('Hack Detected - Aimbot    IGN: %s, #%d' % (self.name, self.player_id), 10080)               
+                        self.ban('Hack Detected - Aimbot    IGN: %s, #%d' % (self.name, self.player_id), 0)               
                         return False     
                     self.prevtarget = hit_player.name
                     self.prev_body_part = body_part1  
